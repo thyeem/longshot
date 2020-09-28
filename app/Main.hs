@@ -5,13 +5,10 @@ import           Control.DeepSeq
 import           Control.Parallel               ( par
                                                 , pseq
                                                 )
-import           Data.Word                      ( Word8 )
-import qualified Data.ByteString               as B
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
-import           Data.Char                      ( ord )
 import           Data.List.Split                ( chunksOf )
-import           Crypto.Hash.SHA256             ( hash )
+import qualified Crypto.Hash.SHA256            as S
 
 
 -- | Number of chunks you want
@@ -29,37 +26,29 @@ chars = ['0' .. '9']
 -- Search space will be tremendously increased when using like:
 -- chars = ['A' .. 'Z'] <> ['a' .. 'z'] <> ['0' .. '9']
 
--- | Split the whole search spaces by number of processor
+-- | Split the whole search spaces by number of pieces
 chunks :: [[Integer]]
 chunks = chunksOf pieces [1 .. 10 ^ length key]
 
-byteChars :: [Word8]
-byteChars = fromIntegral . ord <$> chars
-
 -- | Image: hash value to find
 image :: C.ByteString
-image = hash . C.pack $ key
+image = S.hash . C.pack $ key
 
 -- | Brute Force attack
 bruteforce :: C.ByteString -> [Integer] -> Bool
 bruteforce image searchSpace =
-  or ((image ==) . hash . C.pack . show <$> searchSpace)
+  or ((image ==) . S.hash . C.pack . show <$> searchSpace)
 
 -- | Parallel map using deepseq, par and pseq
-map' :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]
-map' f []       = []
-map' f (x : xs) = y `par` ys `pseq` (y : ys) where
+pmap :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]
+pmap f []       = []
+pmap f (x : xs) = y `par` ys `pseq` (y : ys) where
   y  = force $ f x
-  ys = map' f xs
-
-infixl 4 <%>
--- | Infix map'
-(<%>) :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]
-(<%>) = map'
+  ys = pmap f xs
 
 main :: IO ()
 main
-  | or $ bruteforce image <%> chunks
+  | or $ bruteforce image `pmap` chunks
   = putStrLn $ "Found: " <> (C.unpack . H.encode $ image)
   | otherwise
   = putStrLn "Not Found"

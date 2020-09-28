@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7c191e7134e7d297a06794d78088257f51087d260418e3514d4216b8b78f5f98
+-- hash: e1d73f3f7cfbd6b47fea6a30e329cd15619252ae78d21bb328735e7d090cd561
 
 name:           BruteForce
 version:        0.1.0.0
@@ -49,7 +49,7 @@ executable bruteforce
       Paths_BruteForce
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -feager-blackholing
   build-depends:
       BruteForce
     , base >=4.7 && <5
