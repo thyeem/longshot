@@ -1,18 +1,17 @@
 name:                BruteForce
 version:             0.1.0.0
 github:              "thyeem/francis/BruteForce"
-license:             BSD3
+license:             MIT
 author:              "Francis Lim"
 maintainer:          "thyeem@gmail.com"
 copyright:           "Francis 2020"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
+# synopsis:            Search by Brute-force method of way more easy-to-use
+# category:            Brute-force method, Proof by exhaustion, Cryptography
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
@@ -21,6 +20,7 @@ description:         Please see the README on GitHub at <https://github.com/thye
 
 dependencies:
 - base >= 4.7 && < 5
+- containers
 - bytestring
 - parallel
 - deepseq
@@ -39,6 +39,7 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -dynamic
     - -feager-blackholing
     - -g0
     dependencies:

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 81c259f7dcd17bd3d29d5acd3d30fba3e34c342d4d1a4d5431dc5fce45c503b3
+-- hash: ab2ff732eefdc6fdf2981fb5b28069bfebd355ccb7a98c900d405e6566ce842e
 
 name:           BruteForce
 version:        0.1.0.0
@@ -14,12 +14,11 @@ bug-reports:    https://github.com/thyeem/francis/issues
 author:         Francis Lim
 maintainer:     thyeem@gmail.com
 copyright:      Francis 2020
-license:        BSD3
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    ChangeLog.md
 
 source-repository head
   type: git
@@ -38,6 +37,7 @@ library
     , base16-bytestring
     , blake2
     , bytestring
+    , containers
     , cryptohash-sha256
     , deepseq
     , parallel
@@ -49,13 +49,14 @@ executable bruteforce
       Paths_BruteForce
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -feager-blackholing -g0
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -dynamic -feager-blackholing -g0
   build-depends:
       BruteForce
     , base >=4.7 && <5
     , base16-bytestring
     , blake2
     , bytestring
+    , containers
     , cryptohash-sha256
     , deepseq
     , parallel
@@ -75,6 +76,7 @@ test-suite bruteforce-test
     , base16-bytestring
     , blake2
     , bytestring
+    , containers
     , cryptohash-sha256
     , deepseq
     , parallel
