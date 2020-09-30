@@ -1,4 +1,5 @@
-## Brute Force using Haskell parallelism
+## BruteForce
+Search by Brute-force method or Proof by exhaustion or Case by case search
 
 
 ```bash

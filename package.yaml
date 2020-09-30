@@ -22,21 +22,14 @@ description:         Please see the README on GitHub at <https://github.com/thye
 dependencies:
 - base >= 4.7 && < 5
 - bytestring
-- base16-bytestring
-- cryptohash-sha256
-- split
 - parallel
 - deepseq
+- base16-bytestring
+- cryptohash-sha256
+- blake2
 
 library:
   source-dirs: src
-
-default-extensions: 
-- StrictData
-- BangPatterns
-- DeriveAnyClass
-- StandaloneDeriving
-- DeriveGeneric
 
 executables:
   bruteforce:
@@ -46,8 +39,8 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    - -g0
     - -feager-blackholing
+    - -g0
     dependencies:
     - BruteForce 
 

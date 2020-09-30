@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 935756f3e29e8a4f4888248d6e6278e8e654e7e4988e15bdf1b9493939b28ab4
+-- hash: 81c259f7dcd17bd3d29d5acd3d30fba3e34c342d4d1a4d5431dc5fce45c503b3
 
 name:           BruteForce
 version:        0.1.0.0
@@ -28,20 +28,19 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      BruteForce
   other-modules:
       Paths_BruteForce
   hs-source-dirs:
       src
-  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
   build-depends:
       base >=4.7 && <5
     , base16-bytestring
+    , blake2
     , bytestring
     , cryptohash-sha256
     , deepseq
     , parallel
-    , split
   default-language: Haskell2010
 
 executable bruteforce
@@ -50,17 +49,16 @@ executable bruteforce
       Paths_BruteForce
   hs-source-dirs:
       app
-  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -g0 -feager-blackholing
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -feager-blackholing -g0
   build-depends:
       BruteForce
     , base >=4.7 && <5
     , base16-bytestring
+    , blake2
     , bytestring
     , cryptohash-sha256
     , deepseq
     , parallel
-    , split
   default-language: Haskell2010
 
 test-suite bruteforce-test
@@ -70,15 +68,14 @@ test-suite bruteforce-test
       Paths_BruteForce
   hs-source-dirs:
       test
-  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       BruteForce
     , base >=4.7 && <5
     , base16-bytestring
+    , blake2
     , bytestring
     , cryptohash-sha256
     , deepseq
     , parallel
-    , split
   default-language: Haskell2010
