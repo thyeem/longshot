@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e1d73f3f7cfbd6b47fea6a30e329cd15619252ae78d21bb328735e7d090cd561
+-- hash: 935756f3e29e8a4f4888248d6e6278e8e654e7e4988e15bdf1b9493939b28ab4
 
 name:           BruteForce
 version:        0.1.0.0
@@ -33,6 +33,7 @@ library
       Paths_BruteForce
   hs-source-dirs:
       src
+  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
   build-depends:
       base >=4.7 && <5
     , base16-bytestring
@@ -49,7 +50,8 @@ executable bruteforce
       Paths_BruteForce
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -feager-blackholing
+  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -g0 -feager-blackholing
   build-depends:
       BruteForce
     , base >=4.7 && <5
@@ -68,6 +70,7 @@ test-suite bruteforce-test
       Paths_BruteForce
   hs-source-dirs:
       test
+  default-extensions: StrictData BangPatterns DeriveAnyClass StandaloneDeriving DeriveGeneric
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       BruteForce

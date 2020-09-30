@@ -31,6 +31,13 @@ dependencies:
 library:
   source-dirs: src
 
+default-extensions: 
+- StrictData
+- BangPatterns
+- DeriveAnyClass
+- StandaloneDeriving
+- DeriveGeneric
+
 executables:
   bruteforce:
     main:                Main.hs
@@ -39,6 +46,7 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -g0
     - -feager-blackholing
     dependencies:
     - BruteForce 
