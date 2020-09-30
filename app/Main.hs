@@ -1,10 +1,11 @@
 module Main where
 
 import           BruteForce
-import           Data.Maybe                     ( catMaybes )
+import           Control.Applicative
 
 -- | Solve a given problem
 main :: IO ()
-main | null found = putStrLn "Not found"
-     | otherwise  = putStrLn $ "Found: " <> (show . head $ found)
-  where found = catMaybes $ bruteforce <%> [0 .. chunks]
+main = case found of
+  Just x -> putStrLn $ "Found: " <> show x
+  _      -> putStrLn "Not found"
+  where found = foldl (<|>) empty $ bruteforce <%> [0 .. chunks]
