@@ -1,5 +1,6 @@
 module BruteForce where
 
+import           Control.Monad
 import           Control.DeepSeq
 import           Control.Parallel               ( par
                                                 , pseq
@@ -29,6 +30,9 @@ chars = "0123456789"
 limit :: Int
 limit = 8
 
+lenChars = length chars
+predLimit = pred limit
+
 -------------------------------------------------------------------
 -- | Number of chunks
 -- How many search zones would you have? 
@@ -43,6 +47,21 @@ unit = fromIntegral (length chars ^ limit) `div` chunks
 image :: C.ByteString
 image = fst . H.decode . C.pack $ hex
 
+-- | Character lookup table
+-- cmap :: M.Map Integer C.ByteString
+-- cmap = foldr (uncurry M.insert) mempty $ zip [0 ..] $ C.pack . (: []) <$> chars
+
+byteChars :: [C.ByteString]
+byteChars = C.pack . (: []) <$> chars
+
+-- | 
+-- convert :: C.ByteString -> Int -> Int -> Integer -> C.ByteString
+-- convert bytes size e num | e == 0    = bytes'
+--                          | otherwise = convert bytes' size (pred e) r
+--  where
+--   (q, r) = num `divMod` fromIntegral (size ^ e)
+--   bytes' = bytes <> (cmap M.! q)
+
 -- | Brute-force attack
 bruteforce :: Integer -> Maybe Integer
 bruteforce index = find ((== image) . S.hash . C.pack . show) domain
@@ -54,3 +73,17 @@ f <%> []       = []
 f <%> (x : xs) = y `par` ys `pseq` (y : ys) where
   y  = force $ f x
   ys = f <%> xs
+
+bruteforce' :: C.ByteString -> [C.ByteString]
+bruteforce' a = do
+  b <- byteChars
+  c <- byteChars
+  d <- byteChars
+  e <- byteChars
+  f <- byteChars
+  g <- byteChars
+  h <- byteChars
+  let bytes = foldl (<>) mempty [a, b, c, d, e, f, g, h]
+  guard (image == S.hash bytes)
+  return bytes
+
