@@ -1,8 +1,12 @@
 module Main where
 
-import           BruteForce
-import           Control.Applicative
 import qualified Data.ByteString.Char8         as C
+import           BruteForce
+import           Control.Monad
+import           Control.Applicative
+import           Language.Haskell.TH
+import qualified Crypto.Hash.SHA256            as S
+import qualified Data.ByteString.Base16        as H
 
 -- | Solve a given problem
 -- main :: IO ()
@@ -12,6 +16,7 @@ import qualified Data.ByteString.Char8         as C
 --   where found = foldl (<|>) empty $ bruteforce <%> [0 .. chunks]
 
 main :: IO ()
-main | null found = putStrLn "Not found"
-     | otherwise  = putStrLn $ "Found: " <> (C.unpack . head $ found)
-  where found = foldl (<|>) empty $ bruteforce' <%> byteChars
+main = case found of
+  Just x -> putStrLn $ "Found: " <> C.unpack x
+  _      -> putStrLn "Not found"
+  where found = $(bruteforceN limit)  -- <%> byteChars

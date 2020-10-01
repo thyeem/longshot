@@ -21,6 +21,7 @@ description:         Please see the README on GitHub at <https://github.com/thye
 dependencies:
 - base >= 4.7 && < 5
 - containers
+- template-haskell
 - bytestring
 - parallel
 - deepseq
@@ -30,6 +31,11 @@ dependencies:
 
 library:
   source-dirs: src
+
+default-extensions: 
+- TemplateHaskell 
+- DeriveLift 
+- StandaloneDeriving
 
 executables:
   bruteforce:
@@ -42,6 +48,7 @@ executables:
     - -dynamic
     - -feager-blackholing
     - -g0
+    - -ddump-splices
     dependencies:
     - BruteForce 
 

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ab2ff732eefdc6fdf2981fb5b28069bfebd355ccb7a98c900d405e6566ce842e
+-- hash: c1dab1e53f9e6d385f05db73f0da7afcce4daef5a28bb72d6c169049b2c667e5
 
 name:           BruteForce
 version:        0.1.0.0
@@ -32,6 +32,7 @@ library
       Paths_BruteForce
   hs-source-dirs:
       src
+  default-extensions: TemplateHaskell DeriveLift StandaloneDeriving
   build-depends:
       base >=4.7 && <5
     , base16-bytestring
@@ -41,6 +42,7 @@ library
     , cryptohash-sha256
     , deepseq
     , parallel
+    , template-haskell
   default-language: Haskell2010
 
 executable bruteforce
@@ -49,7 +51,8 @@ executable bruteforce
       Paths_BruteForce
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -dynamic -feager-blackholing -g0
+  default-extensions: TemplateHaskell DeriveLift StandaloneDeriving
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -dynamic -feager-blackholing -g0 -ddump-splices
   build-depends:
       BruteForce
     , base >=4.7 && <5
@@ -60,6 +63,7 @@ executable bruteforce
     , cryptohash-sha256
     , deepseq
     , parallel
+    , template-haskell
   default-language: Haskell2010
 
 test-suite bruteforce-test
@@ -69,6 +73,7 @@ test-suite bruteforce-test
       Paths_BruteForce
   hs-source-dirs:
       test
+  default-extensions: TemplateHaskell DeriveLift StandaloneDeriving
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       BruteForce
@@ -80,4 +85,5 @@ test-suite bruteforce-test
     , cryptohash-sha256
     , deepseq
     , parallel
+    , template-haskell
   default-language: Haskell2010
