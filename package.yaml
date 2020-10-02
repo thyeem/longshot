@@ -34,8 +34,6 @@ library:
 
 default-extensions: 
 - TemplateHaskell 
-- DeriveLift 
-- StandaloneDeriving
 
 executables:
   bruteforce:

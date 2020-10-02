@@ -6,3 +6,4 @@
 *.cabal
 *.o
 *.hi
+app/bruteforce

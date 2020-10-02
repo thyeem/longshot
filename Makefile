@@ -5,12 +5,12 @@ path := $(shell stack path --local-install-root)/bin
 build: 
 	@echo $(path)
 	stack build 
-	cp -f $(path)/$(bin) .
-	/usr/bin/strip ./$(bin)
+	cp -f $(path)/$(bin) app
+	/usr/bin/strip app/$(bin)
 
 test:
-	./$(bin) +RTS -s
+	app/$(bin) +RTS -s
 	
 clean:
-	rm -f $(bin)
+	rm -f app/$(bin)
 
