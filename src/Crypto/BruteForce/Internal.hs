@@ -10,14 +10,15 @@ import           Language.Haskell.TH
 import           Crypto.BruteForce
 import           Crypto.BruteForce.TH
 
-
+-- Declaration of bruteforcePar: generating code by splicing
 $( funcGenerator )
 
-bruteforce :: IO ()
+-- | Brute-force search
+bruteforce :: Maybe String
 bruteforce = case found of
-  Just x -> putStrLn $ "Found: " <> C.unpack x
-  _      -> putStrLn "Not found"
-  where found = foldl (<|>) empty (id <%> $( funcListPar ))
+  Just x -> Just $ C.unpack x
+  _      -> Nothing
+  where found = foldl (<|>) empty (bruteforcePar <%> prefixes)
 
 -- | Parallel map using deepseq, par and pseq
 (<%>) :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]
@@ -25,5 +26,3 @@ f <%> []       = []
 f <%> (x : xs) = y `par` ys `pseq` (y : ys) where
   y  = force $ f x
   ys = f <%> xs
-
-
