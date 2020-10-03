@@ -2,34 +2,39 @@ module Crypto.BruteForce.TH where
 
 import           Control.Monad
 import           Language.Haskell.TH
-import qualified Data.ByteString.Char8         as C
-import qualified Crypto.Hash.SHA256            as S
-import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B
 import           Crypto.BruteForce
 
 -- | Brute-force with N-search-length using TH
-bruteforceN :: Q Exp -> Q Exp
-bruteforceN prefix = do
-  xs <- replicateM (maxSearchLength - numPrefix) (newName "xs")
-  let pts   = varP <$> xs
-  let bytes = [| C.pack $(prefix) <> 
-                 $( foldl merge [| mempty |] (varE <$> xs) ) |]
-  let cond  = condE [| $( hashE bytes ) == $( varE 'image ) |]
-                    [| Just $( bytes ) |]
+bruteforceN :: Int -> Q Exp -> Q Exp -> Q Exp -> Q Exp -> Q Exp
+bruteforceN numBind chars hex hasher prefix = do
+  names <- replicateM numBind (newName "names")
+  let pats  = varP <$> names
+  let bytes = [| $(prefix) <> 
+                 $( foldl merge [| mempty |] (varE <$> names) ) |]
+  let cond  = condE [| $( hashE bytes ) == $(hex) |]
+                    [| Just (toKey $( bytes )) |]
                     [| Nothing |]
-  let stmts  = ((`bindS` varE 'byteChars) <$> pts) <> 
+  let stmts = ((`bindS` chars) <$> pats) <> 
                [noBindS cond]
   [| foldl (<|>) empty $( compE stmts ) |]
  where
   merge a b = [| $a <> $b |]
-  hashE = appE (varE 'S.hash)
+  hashE = appE hasher
 
 -- | Declare function to run in parallel for search 
 funcGenerator :: Q [Dec]
-funcGenerator = do
-   let name = mkName "bruteforcePar" 
-   prefix <- newName "prefix"
-   sequence [ funD name 
-              [ clause [varP prefix] 
-                (normalB (bruteforceN (varE prefix))) 
-                [] ] ]
+funcGenerator = forM [0 .. defNumBind] funcG where 
+  funcG numBind = do
+    let name = mkName $ "bruteforce" <> show numBind
+    chars <- newName "chars"
+    hex <- newName "hex"
+    hasher <- newName "hasher"
+    prefix <- newName "prefix"
+    funD name 
+      [ clause [varP chars, varP hex, varP hasher, varP prefix] 
+        (normalB (bruteforceN numBind (varE chars) (varE hex) (varE hasher) (varE prefix))) 
+        [] ]
+
+-- | Get list of functions to run in parallel for search
+funcList :: Q Exp
+funcList = listE (varE . mkName . ("bruteforce" <> ) . show <$> [0 .. defNumBind])

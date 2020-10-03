@@ -30,6 +30,10 @@ resolver: lts-14.21
 #   - wai
 packages:
 - .
+
+extra-deps:
+- keccak-0.2.0@sha256:9200f86e8f6ed329e85bae8c704ad796c4b006ef83da396fa6b9c9b8037de33a,2418
+
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:

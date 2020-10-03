@@ -10,15 +10,33 @@ import           Language.Haskell.TH
 import           Crypto.BruteForce
 import           Crypto.BruteForce.TH
 
--- Declaration of bruteforcePar: generating code by splicing
+-- Declaration of bruteforceN: generating code by splicing
 $( funcGenerator )
 
 -- | Brute-force search
-bruteforce :: Maybe String
-bruteforce = case found of
-  Just x -> Just $ C.unpack x
-  _      -> Nothing
-  where found = foldl (<|>) empty (bruteforcePar <%> prefixes)
+bruteforce
+  :: Int
+  -> [C.ByteString]
+  -> C.ByteString
+  -> (C.ByteString -> C.ByteString)
+  -> [C.ByteString]
+  -> Maybe String
+bruteforce numBind chars hex hasher prefixes = found
+ where
+  found  = foldl (<|>) empty (runPar <%> prefixes)
+  runPar = bruteforcePar numBind chars hex hasher
+
+bruteforcePar
+  :: Int
+  -> [C.ByteString]
+  -> C.ByteString
+  -> (C.ByteString -> C.ByteString)
+  -> C.ByteString
+  -> Maybe String
+bruteforcePar n
+  | n < 0 = head $( funcList )
+  | n `elem` [0 .. defNumBind] = $( funcList ) !! n
+  | otherwise = errorWithoutStackTrace "Not available search length"
 
 -- | Parallel map using deepseq, par and pseq
 (<%>) :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]

@@ -25,9 +25,11 @@ dependencies:
 - bytestring
 - parallel
 - deepseq
+- docopt
 - base16-bytestring
 - cryptohash-sha256
 - blake2
+- keccak
 
 library:
   source-dirs: src
