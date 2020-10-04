@@ -1,4 +1,4 @@
-module Crypto.BruteForce.Internal where
+module Crypto.LongShot.Internal where
 
 import           Control.Applicative
 import           Control.DeepSeq
@@ -7,8 +7,8 @@ import           Control.Parallel               ( par
                                                 )
 import qualified Data.ByteString.Char8         as C
 import           Language.Haskell.TH
-import           Crypto.BruteForce
-import           Crypto.BruteForce.TH
+import           Crypto.LongShot
+import           Crypto.LongShot.TH
 
 -- Declaration of bruteforceN: generating code by splicing
 $( funcGenerator )

@@ -6,4 +6,4 @@
 *.cabal
 *.o
 *.hi
-app/bruteforce
+app/longshot

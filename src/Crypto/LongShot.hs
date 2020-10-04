@@ -1,4 +1,4 @@
-module Crypto.BruteForce
+module Crypto.LongShot
   ( defChars
   , defSearchLength
   , defNumPrefix
@@ -52,7 +52,7 @@ image = fst . H.decode . C.pack
 byteChars :: String -> [C.ByteString]
 byteChars chars = C.pack . (: []) <$> chars
 
--- | Combinations prefixes possible: size of (length of chars) ^ (numPrefix)
+-- | Combination of prefixes possible: size of (length of chars) ^ (numPrefix)
 bytePrefixes :: Int -> String -> [C.ByteString]
 bytePrefixes numPrefix chars = C.pack <$> replicateM numPrefix chars
 

@@ -1,27 +1,27 @@
-module Crypto.BruteForce.TH where
+module Crypto.LongShot.TH where
 
 import           Control.Monad
 import           Language.Haskell.TH
-import           Crypto.BruteForce
+import           Crypto.LongShot
 
 -- | Brute-force with N-search-length using TH
 bruteforceN :: Int -> Q Exp -> Q Exp -> Q Exp -> Q Exp -> Q Exp
 bruteforceN numBind chars hex hasher prefix = do
   names <- replicateM numBind (newName "names")
   let pats  = varP <$> names
-  let bytes = [| $(prefix) <> 
-                 $( foldl merge [| mempty |] (varE <$> names) ) |]
-  let cond  = condE [| $( hashE bytes ) == $(hex) |]
+  let bytes = [| $( prefix ) <>
+                 $( foldl (\a b -> [| $a <> $b |])
+                    [| mempty |]
+                    (varE <$> names)
+                  )
+              |]
+  let cond  = condE [| $( appE hasher bytes ) == $(hex) |]
                     [| Just (toKey $( bytes )) |]
                     [| Nothing |]
-  let stmts = ((`bindS` chars) <$> pats) <> 
-               [noBindS cond]
+  let stmts = ((`bindS` chars) <$> pats) <> [noBindS cond]
   [| foldl (<|>) empty $( compE stmts ) |]
- where
-  merge a b = [| $a <> $b |]
-  hashE = appE hasher
 
--- | Declare function to run in parallel for search 
+-- | Declare functions to run in parallel for search
 funcGenerator :: Q [Dec]
 funcGenerator = forM [0 .. defNumBind] funcG where 
   funcG numBind = do
@@ -33,7 +33,8 @@ funcGenerator = forM [0 .. defNumBind] funcG where
     funD name 
       [ clause [varP chars, varP hex, varP hasher, varP prefix] 
         (normalB (bruteforceN numBind (varE chars) (varE hex) (varE hasher) (varE prefix))) 
-        [] ]
+        []
+      ]
 
 -- | Get list of functions to run in parallel for search
 funcList :: Q Exp

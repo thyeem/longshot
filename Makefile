@@ -1,4 +1,4 @@
-bin := bruteforce
+bin := longshot
 path := $(shell stack path --local-install-root)/bin
 
 .PHONY: build test clean

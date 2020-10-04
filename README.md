@@ -1,17 +1,26 @@
-# BruteForce
-Search by Brute-force method using parallelism
+<p align="center"> <img src="longshot.png" height="200"/> </p>
 
-* Support various search lengths, charset and hashers.
-* Use CPUs _as much as possible_
-* Use, however, memory _as little as possible_
-* Enjoy it!
+
+> Is it really a __long shot__ to hope that the COVID-19 pandemic will end?
+
+# LongShot
+
+Search for a given hash value using _Brute-force_ method based on _parallelism_
+
+* Support various __search lengths__, __character sets__ and __hashers__.
+* Soft mode: searches only for a given _exact length_
+* Deep mode: searches _everything less than or equal_ to a given length.
+* Use `CPUs` as _much_ as possible
+* Use, however, `memory` as _little_ as possible
+
+Enjoy it!
 
 ```plain
-bruteforce - Fast and concise Brute-force search
+longshot - Fast and concise Brute-force search
 
 Usage:
-  bruteforce run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
-  bruteforce image      [-a HASHER] KEY
+  longshot run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
+  longshot image      [-a HASHER] KEY
 
 Commands:
   run                   Brute-force search with given hexstring and options
@@ -32,13 +41,20 @@ Options:
 
 ## How to build
 ```bash
-$ git clone https://github.com/thyeem/BruteForce.git
+$ git clone https://github.com/thyeem/LongShot.git
 
 $ make build 
 
-## You can see an executable 'bruteforce' here
+## You can see an executable 'longshot' here
 $ cd app
 
 ## And refer to the following usage
-$ app/bruteforce -h
+## NOTE: the order of optional parameters matters.
+$ app/longshot -h
 ```
+
+## Examples
+```bash
+
+```
+

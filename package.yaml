@@ -1,6 +1,6 @@
-name:                BruteForce
+name:                LongShot
 version:             0.1.0.0
-github:              "thyeem/francis/BruteForce"
+github:              "thyeem/francis/LongShot"
 license:             MIT
 author:              "Francis Lim"
 maintainer:          "thyeem@gmail.com"
@@ -16,7 +16,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/thyeem/francis/BruteForce#readme>
+description:         Please see the README on GitHub at <https://github.com/thyeem/francis/LongShot#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -38,7 +38,7 @@ default-extensions:
 - TemplateHaskell 
 
 executables:
-  bruteforce:
+  longshot:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -50,10 +50,10 @@ executables:
     - -g0
     # - -ddump-splices
     dependencies:
-    - BruteForce 
+    - LongShot 
 
 tests:
-  bruteforce-test:
+  longshot-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -61,4 +61,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - BruteForce 
+    - LongShot 

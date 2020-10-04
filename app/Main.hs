@@ -9,16 +9,15 @@ import qualified Data.ByteString.Base16        as H
 import qualified Crypto.Hash.SHA256            as S
 import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B
 import qualified Crypto.Hash.Keccak            as K
-import           Crypto.BruteForce
-import           Crypto.BruteForce.Internal
+import           Crypto.LongShot.Internal
 
 patterns :: Docopt
 patterns = [docopt|
-bruteforce - Fast and concise Brute-force search
+longshot - Fast and concise Brute-force search
 
 Usage:
-  bruteforce run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
-  bruteforce image      [-a HASHER] KEY
+  longshot run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
+  longshot image      [-a HASHER] KEY
 
 Commands:
   run                   Brute-force search with given hexstring and options
@@ -48,7 +47,7 @@ main = do
   when (args >< command "image") $ genImage args
   when (args >< command "run") $ run args
 
--- | Command: genImage
+-- | Command: image
 genImage :: Arguments -> IO ()
 genImage args = do
   key    <- C.pack <$> (args <->|! argument "KEY")
