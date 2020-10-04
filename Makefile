@@ -9,7 +9,7 @@ build:
 	/usr/bin/strip app/$(bin)
 
 test:
-	app/$(bin) +RTS -s
+	stack test
 	
 clean:
 	rm -f app/$(bin)

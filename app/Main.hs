@@ -17,7 +17,7 @@ patterns = [docopt|
 bruteforce - Fast and concise Brute-force search
 
 Usage:
-  bruteforce run        [-n SIZE] [-c CHARS] [-a HASHER] HEX
+  bruteforce run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
   bruteforce image      [-a HASHER] KEY
 
 Commands:
@@ -34,6 +34,7 @@ Options:
   -c CHARS              Specify characters in preimage  [default: 0123456789]
   -a HASHER             Specify hash algorithm  [default: sha256]
                         Available HASHER: sha256 | blake2b | keccak256
+  --deep                Search deeply including less than a given length
 |]
 
 -- | Defines args-ops frequently used
