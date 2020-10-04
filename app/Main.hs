@@ -34,7 +34,7 @@ Options:
   -c CHARS              Specify characters in preimage  [default: 0123456789]
   -a HASHER             Specify hash algorithm  [default: sha256]
                         Available HASHER: sha256 | blake2b | keccak256
-  --deep                Search deeply including less than a given length
+  --deep                Search deeply including less than a given search length
 |]
 
 -- | Defines args-ops frequently used
@@ -58,14 +58,13 @@ genImage args = do
 -- | Command: run
 run :: Arguments -> IO ()
 run args = do
-  hex    <- image <$> (args <->|! argument "HEX")
+  hex    <- args <->|! argument "HEX"
+  chars  <- args <->|! shortOption 'c'
   size   <- (read <$> (args <->|! shortOption 'n')) :: IO Int
   hasher <- getHasher <$> (args <->|! shortOption 'a')
-  chars' <- args <->|! shortOption 'c'
-  let chars    = byteChars chars'
-  let numBind  = size - defNumPrefix
-  let prefixes = bytePrefixes defNumPrefix chars'
-  let found    = bruteforce numBind chars hex hasher prefixes
+  let solver | args >< longOption "deep" = bruteforceDeep
+             | otherwise                 = bruteforce
+  let found = solver size chars hex hasher
   case found of
     Just key -> putStrLn $ "Found  " <> key
     _        -> putStrLn "Not found"

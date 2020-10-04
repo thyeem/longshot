@@ -15,17 +15,17 @@ $( funcGenerator )
 
 -- | Brute-force search
 bruteforce
-  :: Int
-  -> [C.ByteString]
-  -> C.ByteString
-  -> (C.ByteString -> C.ByteString)
-  -> [C.ByteString]
-  -> Maybe String
-bruteforce numBind chars hex hasher prefixes = found
+  :: Int -> String -> String -> (C.ByteString -> C.ByteString) -> Maybe String
+bruteforce size chars hex hasher = found
  where
   found  = foldl (<|>) empty (runPar <%> prefixes)
-  runPar = bruteforcePar numBind chars hex hasher
+  runPar = bruteforcePar numBind (byteChars chars) (image hex) hasher
+  numPrefix | size < defNumPrefix = 1
+            | otherwise           = defNumPrefix
+  numBind  = size - numPrefix
+  prefixes = bytePrefixes numPrefix chars
 
+-- | Pick up a appropriate search function
 bruteforcePar
   :: Int
   -> [C.ByteString]
@@ -34,9 +34,16 @@ bruteforcePar
   -> C.ByteString
   -> Maybe String
 bruteforcePar n
-  | n < 0 = head $( funcList )
   | n `elem` [0 .. defNumBind] = $( funcList ) !! n
   | otherwise = errorWithoutStackTrace "Not available search length"
+
+-- | Deep Brute-force search including less than a given search size
+bruteforceDeep
+  :: Int -> String -> String -> (C.ByteString -> C.ByteString) -> Maybe String
+bruteforceDeep size x y z = foldl (<|>) empty found
+ where
+  found = deep x y z <%> [1 .. size]
+  deep a b c d = bruteforce d a b c
 
 -- | Parallel map using deepseq, par and pseq
 (<%>) :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]

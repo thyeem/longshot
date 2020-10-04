@@ -27,7 +27,7 @@ Options:
   -c CHARS              Specify characters in preimage  [default: 0123456789]
   -a HASHER             Specify hash algorithm  [default: sha256]
                         Available HASHER: sha256 | blake2b | keccak256
-  --deep                Search deeply including less than a given length
+  --deep                Search deeply including less than a given search length
 ```
 
 ## How to build
