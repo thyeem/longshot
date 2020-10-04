@@ -38,4 +38,4 @@ funcGenerator = forM [0 .. defNumBind] funcG where
 
 -- | Get list of functions to run in parallel for search
 funcList :: Q Exp
-funcList = listE (varE . mkName . ("bruteforce" <> ) . show <$> [0 .. defNumBind])
+funcList = listE (varE . mkName . ("bruteforce" <>) . show <$> [0 .. defNumBind])

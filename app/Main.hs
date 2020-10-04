@@ -20,20 +20,20 @@ Usage:
   longshot image      [-a HASHER] KEY
 
 Commands:
-  run                   Brute-force search with given hexstring and options
-  image                 Generate image from given key string and hash algorithm
+  run                 Brute-force search with given hexstring and options
+  image               Generate image from given key string and hash algorithm
 
 Arguments:
-  HEX                   Specify target hexstring to search
-  KEY                   Specify key string as a preimage
+  HEX                 Specify target hexstring to search
+  KEY                 Specify key string as a preimage
 
 Options:
-  -h --help             Show this
-  -n SIZE               Specify search length  [default: 8]   
-  -c CHARS              Specify characters in preimage  [default: 0123456789]
-  -a HASHER             Specify hash algorithm  [default: sha256]
-                        Available HASHER: sha256 | blake2b | keccak256
-  --deep                Search deeply including less than a given search length
+  -h --help           Show this
+  -n SIZE             Specify search length  [default: 8]   
+  -c CHARS            Specify characters in preimage  [default: 0123456789]
+  -a HASHER           Specify hash algorithm  [default: sha256]
+                      Available HASHER: sha256 | blake2b | keccak256
+  --deep              Search deeply including less than a given search length
 |]
 
 -- | Defines args-ops frequently used
