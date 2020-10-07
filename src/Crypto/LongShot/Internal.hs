@@ -2,9 +2,8 @@ module Crypto.LongShot.Internal where
 
 import           Control.Applicative
 import           Control.DeepSeq
-import           Control.Parallel               ( par
-                                                , pseq
-                                                )
+import           Control.Parallel
+import           Data.Foldable
 import qualified Data.ByteString.Char8         as C
 import           Language.Haskell.TH
 import           Crypto.LongShot
@@ -18,7 +17,7 @@ bruteforce
   :: Int -> String -> String -> (C.ByteString -> C.ByteString) -> Maybe String
 bruteforce size chars hex hasher = found
  where
-  found  = foldl (<|>) empty (runPar <%> prefixes)
+  found  = foldl' (<|>) empty (runPar <%> prefixes)
   runPar = bruteforcePar numBind (byteChars chars) (image hex) hasher
   numPrefix | size < defNumPrefix = 1
             | otherwise           = defNumPrefix
@@ -40,7 +39,7 @@ bruteforcePar n
 -- | Deep Brute-force search including less than a given search size
 bruteforceDeep
   :: Int -> String -> String -> (C.ByteString -> C.ByteString) -> Maybe String
-bruteforceDeep size x y z = foldl (<|>) empty found
+bruteforceDeep size x y z = foldl' (<|>) empty found
  where
   found = deep x y z <%> [1 .. size]
   deep a b c d = bruteforce d a b c

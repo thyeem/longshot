@@ -11,6 +11,11 @@ __Search for preimage__ from a given hash value using _Brute-force_ method based
 * Deep mode: searches _everything less than or equal_ to a given length.
 * Use `CPUs` as _much_ as possible. __Get the most out of them!__
 * Use, however, `memory` as _little_ as possible.
+  
+
+Enjoy `longshot`. Good luck!
+
+
 
 ```plain
 longshot - Fast and concise Brute-force search
@@ -102,5 +107,3 @@ $ ./longshot run -n 12 -c 'abcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+[
 
 ## '+RTS -s' the end of line is optional, and that is for a summary of CPU time and memory.
 ```
-Enjoy `longshot`!
-

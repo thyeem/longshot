@@ -10,13 +10,13 @@ extra-source-files:
 - README.md
 
 # Metadata used when publishing your package
-# synopsis:            Search by Brute-force method of way more easy-to-use
-# category:            Brute-force method, Proof by exhaustion, Cryptography
+# synopsis:            Fast and concise Brute-force search using Haskell parallelism
+# category:            Brute-force method, cryptography, parallelism
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/thyeem/francis/LongShot#readme>
+description:         Readme <https://github.com/thyeem/francis/LongShot#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -27,6 +27,7 @@ dependencies:
 - deepseq
 - docopt
 - base16-bytestring
+- cryptonite
 - cryptohash-sha256
 - blake2
 - keccak
@@ -48,6 +49,7 @@ executables:
     - -dynamic
     - -feager-blackholing
     - -g0
+    - -eventlog
     # - -ddump-splices
     dependencies:
     - LongShot 
@@ -61,4 +63,7 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - tasty
+    - tasty-hunit
+    - tasty-quickcheck
     - LongShot 

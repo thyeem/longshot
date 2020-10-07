@@ -1,6 +1,7 @@
 module Crypto.LongShot.TH where
 
 import           Control.Monad
+import           Data.Foldable
 import           Language.Haskell.TH
 import           Crypto.LongShot
 
@@ -10,7 +11,7 @@ bruteforceN numBind chars hex hasher prefix = do
   names <- replicateM numBind (newName "names")
   let pats  = varP <$> names
   let bytes = [| $( prefix ) <>
-                 $( foldl (\a b -> [| $a <> $b |])
+                 $( foldl' (\a b -> [| $a <> $b |])
                     [| mempty |]
                     (varE <$> names)
                   )
@@ -19,7 +20,7 @@ bruteforceN numBind chars hex hasher prefix = do
                     [| Just (toKey $( bytes )) |]
                     [| Nothing |]
   let stmts = ((`bindS` chars) <$> pats) <> [noBindS cond]
-  [| foldl (<|>) empty $( compE stmts ) |]
+  [| foldl' (<|>) empty $( compE stmts ) |]
 
 -- | Declare functions to run in parallel for search
 funcGenerator :: Q [Dec]
