@@ -8,13 +8,16 @@ import qualified Crypto.Hash.SHA256            as S
 import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B
 import qualified Crypto.Hash.Keccak            as K
 import           Crypto.LongShot.Internal
+import           Crypto.LongShot.Hasher
+
+
 
 main :: IO ()
 main = defaultMain tests
 
 -- | Test for strict mode of Brute-force search 
 -- The key length was limited to 4 as it takes a long time to test
-testLongshot :: (C.ByteString -> C.ByteString) -> Gen Bool
+testLongshot :: Hasher -> Gen Bool
 testLongshot hasher = do
   let chars = "0123456789abcdef~!@#$%*()<>;:?/"
   size <- choose (1, 4) :: Gen Int
@@ -27,7 +30,7 @@ testLongshot hasher = do
 
 -- | Test for deep mode of Brute-force search 
 -- The key length was limited to 4 as it takes a long time to test
-testLongshotDeep :: (C.ByteString -> C.ByteString) -> Gen Bool
+testLongshotDeep :: Hasher -> Gen Bool
 testLongshotDeep hasher = do
   let chars = "0123456789abcdef~!@#$%*)[]}>?;:"
   let size  = 4

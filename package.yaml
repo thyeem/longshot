@@ -23,20 +23,25 @@ dependencies:
 - containers
 - template-haskell
 - bytestring
+- memory
 - parallel
 - deepseq
 - docopt
 - base16-bytestring
 - cryptonite
+- blake3
 - cryptohash-sha256
 - blake2
 - keccak
+- text
 
 library:
   source-dirs: src
 
 default-extensions: 
 - TemplateHaskell 
+- KindSignatures
+- DataKinds
 
 executables:
   longshot:

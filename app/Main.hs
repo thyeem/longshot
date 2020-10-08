@@ -10,6 +10,7 @@ import qualified Crypto.Hash.SHA256            as S
 import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B
 import qualified Crypto.Hash.Keccak            as K
 import           Crypto.LongShot.Internal
+import           Crypto.LongShot.Hasher
 
 patterns :: Docopt
 patterns = [docopt|
@@ -67,11 +68,3 @@ run args = do
   case found of
     Just key -> putStrLn $ "Found  " <> key
     _        -> putStrLn "Not found"
-
--- | Select hasher by name
-getHasher :: String -> (C.ByteString -> C.ByteString)
-getHasher label = case label of
-  "sha256"    -> S.hash
-  "blake2b"   -> B.hash 32 mempty
-  "keccak256" -> K.keccak256
-  a           -> errorWithoutStackTrace $ "Not allowed hash algorithm: " <> a
