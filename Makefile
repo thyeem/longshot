@@ -9,7 +9,7 @@ build:
 	/usr/bin/strip app/$(bin)
 
 test:
-	stack test
+	stack test --test-arguments="--quickcheck-tests 10"
 	
 clean:
 	rm -f app/$(bin)

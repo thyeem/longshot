@@ -6,9 +6,6 @@ import           System.Environment
 import           System.Console.Docopt
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
-import qualified Crypto.Hash.SHA256            as S
-import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B
-import qualified Crypto.Hash.Keccak            as K
 import           Crypto.LongShot.Internal
 import           Crypto.LongShot.Hasher
 
@@ -33,7 +30,13 @@ Options:
   -n SIZE             Specify search length  [default: 8]   
   -c CHARS            Specify characters in preimage  [default: 0123456789]
   -a HASHER           Specify hash algorithm  [default: sha256]
-                      Available HASHER: sha256 | blake2b | keccak256
+                      HASHER available below:
+                      md5           sha1          ripemd160     whirlpool
+                      sha256        sha3_256      sha3_384      sha3_512
+                      blake2s_256   blake2b_256   blake2b_384   blake2b_512
+                      blake3_256    blake3_384    blake3_512
+                      keccak_256    keccak_384    keccak_512
+                      skein_256     skein_384     skein_512
   --deep              Search deeply including less than a given search length
 |]
 

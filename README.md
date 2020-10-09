@@ -37,7 +37,13 @@ Options:
   -n SIZE             Specify search length  [default: 8]   
   -c CHARS            Specify characters available in preimage  [default: 0123456789]
   -a HASHER           Specify hash algorithm  [default: sha256]
-                      Available HASHER: sha256 | blake2b | keccak256
+                      HASHER available below:
+                      md5           sha1          ripemd160     whirlpool
+                      sha256        sha3_256      sha3_384      sha3_512
+                      blake2s_256   blake2b_256   blake2b_384   blake2b_512
+                      blake3_256    blake3_384    blake3_512
+                      keccak_256    keccak_384    keccak_512
+                      skein_256     skein_384     skein_512
   --deep              Search deeply including less than a given search length
 ```
 
@@ -49,6 +55,9 @@ $ make build
 
 ## You can see an executable 'longshot' here
 $ cd app
+
+## Test if installed properly: (QuickCheck property test)
+$ make test
 ```
 
 ## Quick start
@@ -77,7 +86,7 @@ Not found
 ## If you don't know the key length, use deep search. (--deep)
 ## It will try to search with less than or equal to the given length.
 $ ./longshot run --deep 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
-Found 12345
+Found  12345
 ```
 These are all about how to use `longshot`.  
 See below for more interesting detailed examples.
@@ -91,7 +100,7 @@ bb40f637bb211532318965627f15bb165f701230fd83e0adf8cd673a6ee02830
 
 ## Need different character set. Don't forget --deep
 $ ./longshot run -c 'abcdefghijklmnopqrstuvwxyz' -a blake2b --deep bb40f6..e02830
-Found sofia
+Found  sofia
 
 ## You should consider the following if there might be more characters in preimage.
 ## More characters, much longer time to find!
