@@ -1,3 +1,10 @@
+-- |
+-- Module      : Crypto.LongShot.TH
+-- License     : MIT
+-- Maintainer  : Francis Lim <thyeem@gmail.com>
+-- Stability   : experimental
+-- Portability : unknown
+--
 module Crypto.LongShot.TH where
 
 import           Control.Monad

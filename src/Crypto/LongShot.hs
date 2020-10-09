@@ -1,3 +1,29 @@
+-- |
+-- Module      : Crypto.LongShot
+-- License     : MIT
+-- Maintainer  : Francis Lim <thyeem@gmail.com>
+-- Stability   : experimental
+-- Portability : unknown
+--
+-- Search for preimage from a given hash value using Brute-force method based on parallelism
+--
+-- * Support various /search lengths/, /character sets/ and /hashers/.
+-- * /Strict mode/: searches only for a given exact length
+-- * /Deep mode/: searches everything less than or equal to a given length.
+-- * Use @CPUs@ as much as possible. Get the most out of them!
+-- * Use, however, @memory@ as little as possible.
+--
+-- How big is the search space? The space consists of two axes.
+--
+-- * Number of characters available
+-- * Search length of preimage to find
+--
+-- Note that it's proportional to @(X ^ Y)@ rather than @(X * Y)@
+--
+-- The values below are defined by default.
+--
+-- When not provided as options in CUI, the following values are used.
+--
 module Crypto.LongShot
   ( defChars
   , defSearchLength
@@ -14,20 +40,11 @@ import           Control.Monad
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
 
--- // Setting up search space --------------------------------------
--- The values below are defined by default. 
--- When not provided as options in CUI, the following values are used.
-
--- How big is the search space? The space consists of two axes.
--- X-axis: number of characters available
--- Y-axis: search length of preimage to find
--- Note that it's proportional to (X ^ Y) rather than (X * Y)
-
--- | X-axis: characters available in a preimage
+-- | Characters available in a preimage
 defChars :: String
 defChars = "0123456789"
 
--- | Y-axis: search length of preimage
+-- | Search length of preimage
 defSearchLength :: Int
 defSearchLength = 8
 

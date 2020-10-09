@@ -1,4 +1,15 @@
-module Crypto.LongShot.Internal where
+-- |
+-- Module      : Crypto.LongShot.Internal
+-- License     : MIT
+-- Maintainer  : Francis Lim <thyeem@gmail.com>
+-- Stability   : experimental
+-- Portability : unknown
+--
+module Crypto.LongShot.Internal
+  ( bruteforce
+  , bruteforceDeep
+  )
+where
 
 import           Control.Applicative
 import           Control.DeepSeq
@@ -13,7 +24,7 @@ import           Crypto.LongShot.Hasher
 -- Declaration of bruteforceN: generating code by splicing
 $( funcGenerator )
 
--- | Brute-force search
+-- | Brute-force search only for a given exact length
 bruteforce :: Int -> String -> String -> Hasher -> Maybe String
 bruteforce size chars hex hasher = found
  where

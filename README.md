@@ -2,6 +2,11 @@
 
 > Is it really a __long shot__ to hope that the COVID-19 pandemic will end?
 
+
+
+
+
+[![Build Status](https://travis-ci.com/thyeem/LongShot.svg?branch=master)](https://travis-ci.com/thyeem/LongShot)
 # LongShot
 
 __Search for preimage__ from a given hash value using _Brute-force_ method based on _parallelism_

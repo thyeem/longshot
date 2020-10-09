@@ -1,3 +1,10 @@
+-- |
+-- Module      : Crypto.LongShot.Hasher
+-- License     : MIT
+-- Maintainer  : Francis Lim <thyeem@gmail.com>
+-- Stability   : experimental
+-- Portability : unknown
+--
 module Crypto.LongShot.Hasher
   ( Hasher
   , getHasher
@@ -8,19 +15,20 @@ import           GHC.TypeLits
 import           Numeric.Natural
 import qualified Data.ByteArray                as B
 import qualified Data.ByteString.Char8         as C
-import qualified BLAKE3                        as B3
 import qualified Crypto.Hash                   as X
 import qualified Crypto.Hash.SHA256            as S
 import qualified Crypto.Hash.BLAKE2.BLAKE2s    as B2s
 import qualified Crypto.Hash.BLAKE2.BLAKE2b    as B2b
+import qualified BLAKE3                        as B3
 
+-- | Type for hash functions available
 type Hasher = C.ByteString -> C.ByteString
 
 type Blake3_256 = C.ByteString -> B3.Digest (32 :: Nat)
 type Blake3_384 = C.ByteString -> B3.Digest (48 :: Nat)
 type Blake3_512 = C.ByteString -> B3.Digest (64 :: Nat)
 
--- | Select hasher by name
+-- | Select hasher by defined name
 getHasher :: String -> Hasher
 getHasher name = case name of
   "md5"         -> B.convert . X.hashWith X.MD5
