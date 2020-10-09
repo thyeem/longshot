@@ -5,18 +5,10 @@
 -- Stability   : experimental
 -- Portability : unknown
 --
--- Search for preimage from a given hash value using Brute-force method based on parallelism
---
--- * Support various /search lengths/, /character sets/ and /hashers/.
--- * /Strict mode/: searches only for a given exact length
--- * /Deep mode/: searches everything less than or equal to a given length.
--- * Use @CPUs@ as much as possible. Get the most out of them!
--- * Use, however, @memory@ as little as possible.
---
 -- How big is the search space? The space consists of two axes.
 --
--- * Number of characters available
--- * Search length of preimage to find
+-- * X-axis: Number of characters available
+-- * Y-axis: Search length of preimage to find
 --
 -- Note that it's proportional to @(X ^ Y)@ rather than @(X * Y)@
 --

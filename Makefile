@@ -1,5 +1,6 @@
 bin := longshot
 path := $(shell stack path --local-install-root)/bin
+n := 10
 
 .PHONY: build test clean
 build: 
@@ -9,7 +10,7 @@ build:
 	/usr/bin/strip app/$(bin)
 
 test:
-	stack test --test-arguments="--quickcheck-tests 10"
+	stack test --test-arguments="--quickcheck-tests $(n)"
 	
 clean:
 	rm -f app/$(bin)

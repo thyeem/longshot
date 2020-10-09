@@ -1,17 +1,28 @@
-name:                longshot
-version:             0.1.0.0
-github:              "thyeem/longshot"
-license:             MIT
+name: longshot
+version: 0.1.0.0
+synopsis: Fast Brute-force search using parallelism
+description: |
+  Longshot enables to search for preimages from a given hash value
+  using a brute-force method based on parallelism.
+  .
+  * Support various search lengths, character sets and hashers
+  * Strict mode: searches only for a given exact length
+  * Deep mode: searches everything less than or equal to a given length.
+  * Use @CPUs@ as much as possible. Get the most out of them!
+  * Use, however, @memory@ as little as possible.
+  .
+  Please see the documentation at https://github.com/thyeem/longshot
+  for usage example.
+  .
+category:            algorithm, search, cryptography, parallelism
 author:              "Francis Lim, Jongwhan Lee"
-maintainer:          "thyeem@gmail.com"
 copyright:           "Francis, 2020"
+maintainer:          "thyeem@gmail.com"
+license:             MIT
+github:              "thyeem/longshot"
 
 extra-source-files:
 - README.md
-
-synopsis:            Fast and concise Brute-force search using parallelism
-category:            Brute-force method, cryptography, parallelism
-description:         Search for preimage from a given hash value using Brute-force method based on parallelism
 
 dependencies:
 - base >= 4.7 && < 5

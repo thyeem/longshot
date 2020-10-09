@@ -35,7 +35,7 @@ bruteforce size chars hex hasher = found
   numBind  = size - numPrefix
   prefixes = bytePrefixes numPrefix chars
 
--- | Pick up a appropriate search function
+-- | Pick up an appropriate search function
 bruteforcePar
   :: Int
   -> [C.ByteString]

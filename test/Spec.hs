@@ -37,7 +37,6 @@ hashers =
   , "blake3_256"
   , "blake3_384"
   , "blake3_512"
-  , "blake3bp"
   , "keccak_256"
   , "keccak_384"
   , "keccak_512"

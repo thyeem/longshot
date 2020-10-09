@@ -46,7 +46,6 @@ getHasher name = case name of
   "blake3_256"  -> B.convert . (B3.hash . (: []) :: Blake3_256)
   "blake3_384"  -> B.convert . (B3.hash . (: []) :: Blake3_384)
   "blake3_512"  -> B.convert . (B3.hash . (: []) :: Blake3_512)
-  "blake3bp"    -> B.convert . X.hashWith X.Blake2bp_512
   "keccak_256"  -> B.convert . X.hashWith X.Keccak_256
   "keccak_384"  -> B.convert . X.hashWith X.Keccak_384
   "keccak_512"  -> B.convert . X.hashWith X.Keccak_512

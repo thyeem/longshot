@@ -57,11 +57,11 @@ $ git clone https://github.com/thyeem/longshot.git
 
 $ make build 
 
+## Optional: test if installed properly using quickcheck
+$ make test
+
 ## You can see an executable 'longshot' here
 $ cd app
-
-## Test if installed properly: (QuickCheck property test)
-$ make test
 ```
 
 ## Quick start
