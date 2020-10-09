@@ -1,11 +1,11 @@
 -- |
--- Module      : Crypto.LongShot.Internal
+-- Module      : Crypto.Longshot.Internal
 -- License     : MIT
 -- Maintainer  : Francis Lim <thyeem@gmail.com>
 -- Stability   : experimental
 -- Portability : unknown
 --
-module Crypto.LongShot.Internal
+module Crypto.Longshot.Internal
   ( bruteforce
   , bruteforceDeep
   )
@@ -17,9 +17,9 @@ import           Control.Parallel
 import           Data.Foldable
 import qualified Data.ByteString.Char8         as C
 import           Language.Haskell.TH
-import           Crypto.LongShot
-import           Crypto.LongShot.TH
-import           Crypto.LongShot.Hasher
+import           Crypto.Longshot
+import           Crypto.Longshot.TH
+import           Crypto.Longshot.Hasher
 
 -- Declaration of bruteforceN: generating code by splicing
 $( funcGenerator )

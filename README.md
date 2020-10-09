@@ -4,10 +4,9 @@
 
 
 
+[![Build Status](https://travis-ci.com/thyeem/longshot.svg?branch=master)](https://travis-ci.com/thyeem/longshot) <!-- [![Hackage](https://img.shields.io/hackage/v/longshot)](https://hackage.haskell.org/package/longshot) -->
 
-
-[![Build Status](https://travis-ci.com/thyeem/LongShot.svg?branch=master)](https://travis-ci.com/thyeem/LongShot)
-# LongShot
+# longshot
 
 __Search for preimage__ from a given hash value using _Brute-force_ method based on _parallelism_
 
@@ -54,7 +53,7 @@ Options:
 
 ## How to build
 ```bash
-$ git clone https://github.com/thyeem/LongShot.git
+$ git clone https://github.com/thyeem/longshot.git
 
 $ make build 
 

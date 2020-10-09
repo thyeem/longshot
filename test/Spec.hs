@@ -4,8 +4,8 @@ import           Test.Tasty.HUnit
 import           Control.Monad
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
-import           Crypto.LongShot.Internal
-import           Crypto.LongShot.Hasher
+import           Crypto.Longshot.Internal
+import           Crypto.Longshot.Hasher
 
 main :: IO ()
 main = defaultMain tests
@@ -76,10 +76,10 @@ genTestProp f desc algo = testProperty (desc <> algo) (f $ getHasher algo)
 -- | Main test of properties
 tests :: TestTree
 tests = testGroup
-  "LongShot Tests"
-  [ testGroup "Strict-LongShot search"
+  "Longshot Tests"
+  [ testGroup "Strict-Longshot search"
               (genTestProp testLongshot "testLongshot with " <$> hashers)
   , testGroup
-    "Deep-LongShot search"
+    "Deep-Longshot search"
     (genTestProp testLongshotDeep "testLongshotDeep with " <$> hashers)
   ]

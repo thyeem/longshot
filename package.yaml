@@ -1,6 +1,6 @@
-name:                LongShot
+name:                longshot
 version:             0.1.0.0
-github:              "thyeem/LongShot"
+github:              "thyeem/longshot"
 license:             MIT
 author:              "Francis Lim, Jongwhan Lee"
 maintainer:          "thyeem@gmail.com"
@@ -49,7 +49,7 @@ executables:
     - -g0
     - -eventlog
     dependencies:
-    - LongShot 
+    - longshot
 
 tests:
   longshot-test:
@@ -63,4 +63,4 @@ tests:
     - tasty
     - tasty-hunit
     - tasty-quickcheck
-    - LongShot 
+    - longshot

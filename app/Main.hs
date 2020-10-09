@@ -6,8 +6,8 @@ import           System.Environment
 import           System.Console.Docopt
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
-import           Crypto.LongShot.Internal
-import           Crypto.LongShot.Hasher
+import           Crypto.Longshot.Internal
+import           Crypto.Longshot.Hasher
 
 patterns :: Docopt
 patterns = [docopt|

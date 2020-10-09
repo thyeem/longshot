@@ -1,16 +1,16 @@
 -- |
--- Module      : Crypto.LongShot.TH
+-- Module      : Crypto.Longshot.TH
 -- License     : MIT
 -- Maintainer  : Francis Lim <thyeem@gmail.com>
 -- Stability   : experimental
 -- Portability : unknown
 --
-module Crypto.LongShot.TH where
+module Crypto.Longshot.TH where
 
 import           Control.Monad
 import           Data.Foldable
 import           Language.Haskell.TH
-import           Crypto.LongShot
+import           Crypto.Longshot
 
 -- | Brute-force with N-search-length using TH
 bruteforceN :: Int -> Q Exp -> Q Exp -> Q Exp -> Q Exp -> Q Exp

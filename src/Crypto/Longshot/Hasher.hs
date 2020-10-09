@@ -1,11 +1,11 @@
 -- |
--- Module      : Crypto.LongShot.Hasher
+-- Module      : Crypto.Longshot.Hasher
 -- License     : MIT
 -- Maintainer  : Francis Lim <thyeem@gmail.com>
 -- Stability   : experimental
 -- Portability : unknown
 --
-module Crypto.LongShot.Hasher
+module Crypto.Longshot.Hasher
   ( Hasher
   , getHasher
   )

@@ -1,5 +1,5 @@
 -- |
--- Module      : Crypto.LongShot
+-- Module      : Crypto.Longshot
 -- License     : MIT
 -- Maintainer  : Francis Lim <thyeem@gmail.com>
 -- Stability   : experimental
@@ -24,7 +24,7 @@
 --
 -- When not provided as options in CUI, the following values are used.
 --
-module Crypto.LongShot
+module Crypto.Longshot
   ( defChars
   , defSearchLength
   , defNumPrefix
