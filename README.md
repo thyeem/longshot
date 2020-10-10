@@ -52,7 +52,10 @@ Options:
 ```
 
 ## How to build
-```bash
+```shell
+## Install 'stack' if not any
+$ brew install stack
+
 $ git clone https://github.com/thyeem/longshot.git
 
 $ make build 
@@ -65,7 +68,7 @@ $ cd app
 ```
 
 ## Quick start
-```bash
+```shell
 ## Refer to the following usage:
 ## Note that the order of arguments and options matter.
 $ ./longshot -h
@@ -96,7 +99,7 @@ These are all about how to use `longshot`.
 See below for more interesting detailed examples.
 
 ## More examples
-```bash
+```shell
 ## Generate a example image using Blake2b hash algorithm
 ## Blake2b-hashed sofia (my first daughter!)
 $ ./longshot image -a blake2b sofia
