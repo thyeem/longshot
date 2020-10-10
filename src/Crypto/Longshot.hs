@@ -16,17 +16,7 @@
 --
 -- When not provided as options in CUI, the following values are used.
 --
-module Crypto.Longshot
-  ( defChars
-  , defSearchLength
-  , defNumPrefix
-  , defNumBind
-  , image
-  , byteChars
-  , bytePrefixes
-  , toKey
-  )
-where
+module Crypto.Longshot where
 
 import           Control.Monad
 import qualified Data.ByteString.Char8         as C

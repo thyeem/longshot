@@ -4,7 +4,7 @@
 
 
 
-[![Build Status](https://travis-ci.com/thyeem/longshot.svg?branch=master)](https://travis-ci.com/thyeem/longshot) <!-- [![Hackage](https://img.shields.io/hackage/v/longshot)](https://hackage.haskell.org/package/longshot) -->
+[![Build Status](https://travis-ci.com/thyeem/longshot.svg?branch=master)](https://travis-ci.com/thyeem/longshot) [![Hackage](https://img.shields.io/hackage/v/longshot)](https://hackage.haskell.org/package/longshot)
 
 # longshot
 

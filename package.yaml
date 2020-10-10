@@ -1,5 +1,5 @@
 name: longshot
-version: 0.1.0.0
+version: 0.1.0.2
 synopsis: Fast Brute-force search using parallelism
 description: |
   Longshot enables to search for preimages from a given hash value
@@ -23,6 +23,7 @@ github:              "thyeem/longshot"
 
 extra-source-files:
 - README.md
+- ChangeLog.md
 
 dependencies:
 - base               >= 4.12.0 && < 5
