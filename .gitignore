@@ -12,6 +12,7 @@
 stack*.yaml.lock
 .cabal-sandbox/
 cabal-dev/
+dist-newstyle/
 cabal.sandbox.config
 TAGS
 Setup

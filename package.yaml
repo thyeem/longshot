@@ -25,19 +25,19 @@ extra-source-files:
 - README.md
 
 dependencies:
-- base >= 4.7 && < 5
-- containers
-- template-haskell
-- bytestring
-- parallel
-- deepseq
-- docopt
-- base16-bytestring
-- memory
-- cryptohash-sha256
-- cryptonite
-- blake3
-- blake2
+- base               >= 4.12.0 && < 5
+- containers         >= 0.6 && < 0.7
+- template-haskell   >= 2.14.0 && < 2.17
+- deepseq            >= 1.4.4 && < 1.5
+- parallel           >= 3.2.2 && < 3.3
+- docopt             >= 0.7.0 && < 0.8
+- base16-bytestring  >= 0.1.0 && < 0.2
+- bytestring         >= 0.10.8 && < 0.11
+- blake2             >= 0.3.0 && < 0.4
+- blake3             >= 0.2 && < 0.3
+- memory             >= 0.14.0 && < 0.16
+- cryptohash-sha256  >= 0.11.101 && < 0.12
+- cryptonite         >= 0.25
 
 library:
   source-dirs: src
