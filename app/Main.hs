@@ -1,13 +1,13 @@
 {-# LANGUAGE QuasiQuotes #-}
 module Main where
 
-import           Control.Monad
-import           System.Environment
+import           Control.Monad                  ( when )
+import           System.Environment             ( getArgs )
 import           System.Console.Docopt
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
 import           Crypto.Longshot.Internal
-import           Crypto.Longshot.Hasher
+import           Crypto.Longshot.Hasher         ( getHasher )
 
 patterns :: Docopt
 patterns = [docopt|

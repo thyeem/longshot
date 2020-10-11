@@ -7,3 +7,7 @@
 
 ## 0.1.0.2
 * Fixed Hackage metadata
+
+## 0.1.0.3
+* Up to 10% performance improvement
+* Additional explanations on the arguments of the core function

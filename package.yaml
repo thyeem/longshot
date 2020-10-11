@@ -1,5 +1,5 @@
 name: longshot
-version: 0.1.0.2
+version: 0.1.0.3
 synopsis: Fast Brute-force search using parallelism
 description: |
   Longshot enables to search for preimages from a given hash value

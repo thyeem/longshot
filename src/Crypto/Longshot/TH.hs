@@ -7,31 +7,28 @@
 --
 module Crypto.Longshot.TH where
 
-import           Control.Monad
-import           Data.Foldable
+import           Control.Monad                  ( replicateM )
+import           Data.Foldable                  ( foldl' )
+import           Data.ByteString.Char8          ( unpack )
 import           Language.Haskell.TH
-import           Crypto.Longshot
+import           Crypto.Longshot.Const
 
 -- | Brute-force with N-search-length using TH
 bruteforceN :: Int -> Q Exp -> Q Exp -> Q Exp -> Q Exp -> Q Exp
 bruteforceN numBind chars hex hasher prefix = do
   names <- replicateM numBind (newName "names")
   let pats  = varP <$> names
-  let bytes = [| $( prefix ) <>
-                 $( foldl' (\a b -> [| $a <> $b |])
-                    [| mempty |]
-                    (varE <$> names)
-                  )
-              |]
-  let cond  = condE [| $( appE hasher bytes ) == $(hex) |]
-                    [| Just (toKey $( bytes )) |]
+  let bytes = prefix : (varE <$> names)
+  let preimage = [| $( foldl' (\a b -> [| $a <> $b |]) [| mempty |] bytes ) |]
+  let cond  = condE [| $( appE hasher preimage ) == $( hex ) |]
+                    [| Just (unpack $( preimage )) |]
                     [| Nothing |]
   let stmts = ((`bindS` chars) <$> pats) <> [noBindS cond]
   [| foldl' (<|>) empty $( compE stmts ) |]
 
 -- | Declare functions to run in parallel for search
 funcGenerator :: Q [Dec]
-funcGenerator = forM [0 .. maxNumBind] funcG where 
+funcGenerator = mapM funcG [0 .. maxNumBind] where
   funcG numBind = do
     let name = mkName $ "bruteforce" <> show numBind
     chars <- newName "chars"

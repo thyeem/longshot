@@ -11,9 +11,9 @@ module Crypto.Longshot.Hasher
   )
 where
 
-import           GHC.TypeLits
+import           GHC.TypeLits                   ( Nat )
+import           Data.ByteString                ( ByteString )
 import qualified Data.ByteArray                as B
-import qualified Data.ByteString.Char8         as C
 import qualified Crypto.Hash                   as X
 import qualified Crypto.Hash.SHA256            as S
 import qualified Crypto.Hash.BLAKE2.BLAKE2s    as Blake2s
@@ -21,11 +21,11 @@ import qualified Crypto.Hash.BLAKE2.BLAKE2b    as Blake2b
 import qualified BLAKE3                        as Blake3
 
 -- | Type for hash functions available
-type Hasher = C.ByteString -> C.ByteString
+type Hasher = ByteString -> ByteString
 
-type Blake3_256 = C.ByteString -> Blake3.Digest (32 :: Nat)
-type Blake3_384 = C.ByteString -> Blake3.Digest (48 :: Nat)
-type Blake3_512 = C.ByteString -> Blake3.Digest (64 :: Nat)
+type Blake3_256 = ByteString -> Blake3.Digest (32 :: Nat)
+type Blake3_384 = ByteString -> Blake3.Digest (48 :: Nat)
+type Blake3_512 = ByteString -> Blake3.Digest (64 :: Nat)
 
 -- | Select hasher by defined name
 getHasher :: String -> Hasher
