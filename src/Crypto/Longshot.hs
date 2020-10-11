@@ -22,11 +22,11 @@ import           Control.Monad
 import qualified Data.ByteString.Char8         as C
 import qualified Data.ByteString.Base16        as H
 
--- | Characters available in a preimage
+-- | Default characters available in a preimage
 defChars :: String
 defChars = "0123456789"
 
--- | Search length of preimage
+-- | Default search length of preimage
 defSearchLength :: Int
 defSearchLength = 8
 
@@ -34,13 +34,13 @@ defSearchLength = 8
 limitSearchLength :: Int
 limitSearchLength = 20
 
--- | Value related to the number of sparks
+-- | Default value related to the number of sparks
 defNumPrefix :: Int
 defNumPrefix = 3
 
--- | Number of actions in TH bruteforceN
-defNumBind :: Int
-defNumBind = limitSearchLength - defNumPrefix
+-- | Maximum number of actions in bruteforceN
+maxNumBind :: Int
+maxNumBind = limitSearchLength - defNumPrefix
 --------------------------------------------------------------------
 
 -- | Image bytestring: target hash value to find

@@ -31,7 +31,7 @@ bruteforceN numBind chars hex hasher prefix = do
 
 -- | Declare functions to run in parallel for search
 funcGenerator :: Q [Dec]
-funcGenerator = forM [0 .. defNumBind] funcG where 
+funcGenerator = forM [0 .. maxNumBind] funcG where 
   funcG numBind = do
     let name = mkName $ "bruteforce" <> show numBind
     chars <- newName "chars"
@@ -46,4 +46,4 @@ funcGenerator = forM [0 .. defNumBind] funcG where
 
 -- | Get list of functions to run in parallel for search
 funcList :: Q Exp
-funcList = listE (varE . mkName . ("bruteforce" <>) . show <$> [0 .. defNumBind])
+funcList = listE (varE . mkName . ("bruteforce" <>) . show <$> [0 .. maxNumBind])
