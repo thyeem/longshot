@@ -85,10 +85,10 @@ bruteforcePar numBind
 --
 -- See the 'bruteforce' function for the arguments used
 --
-bruteforceDeep :: Int -> String -> String -> Hasher -> Maybe String
-bruteforceDeep size chars hex hasher = foldl' (<|>) empty found
+bruteforceDeep :: String -> String -> Hasher -> Maybe String
+bruteforceDeep chars hex hasher = foldl' (<|>) empty found
  where
-  found = deep chars hex hasher <%> [1 .. size]
+  found = deep chars hex hasher <$> [1 .. limitSearchLength]
   deep a b c d = bruteforce d a b c
 
 -- | Parallel map using deepseq, par and pseq

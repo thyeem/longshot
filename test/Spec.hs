@@ -45,40 +45,33 @@ hashers =
   , "skein_512"
   ]
 
--- | Test for strict mode of Brute-force search
-testLongshot :: Hasher -> Gen Bool
-testLongshot hasher = do
+-- | Test for { strict | deep } mode of Brute-force search
+testLongshot :: String -> String -> Gen Bool
+testLongshot mode algo = do
   size <- choose (1, limit) :: Gen Int
   key  <- replicateM size (elements chars :: Gen Char)
-  let hex   = C.unpack . H.encode . hasher . C.pack $ key
-  let found = bruteforce size chars hex hasher
-  case found of
-    Just x | x == key -> return True
-    _                 -> return False
-
--- | Test for deep mode of Brute-force search
-testLongshotDeep :: Hasher -> Gen Bool
-testLongshotDeep hasher = do
-  let size = limit
-  size' <- choose (1, limit) :: Gen Int
-  key   <- replicateM size' (elements chars :: Gen Char)
-  let hex   = C.unpack . H.encode . hasher . C.pack $ key
-  let found = bruteforceDeep size chars hex hasher
+  let hasher = getHasher algo
+  let hex    = C.unpack . H.encode . hasher . C.pack $ key
+  let solver | mode == "strict" = bruteforce size
+             | otherwise        = bruteforceDeep
+  let found = solver chars hex hasher
   case found of
     Just x | x == key -> return True
     _                 -> return False
 
 -- | Property test generator
-genTestProp :: (Hasher -> Gen Bool) -> TestName -> TestName -> TestTree
-genTestProp f desc algo = testProperty (desc <> algo) (f $ getHasher algo)
+genTestProp
+  :: (String -> String -> Gen Bool) -> String -> String -> String -> TestTree
+genTestProp f mode desc algo = testProperty (desc <> algo) (f mode algo)
 
 -- | Main test of properties
 tests :: TestTree
 tests = testGroup
   "Longshot Tests"
-  [ testGroup "Strict-Longshot search"
-              (genTestProp testLongshot "testLongshot with " <$> hashers)
+  [ testGroup
+    "Strict-Longshot search"
+    (genTestProp testLongshot "strict" "Strict longshot with " <$> hashers)
   , testGroup
     "Deep-Longshot search"
-    (genTestProp testLongshotDeep "testLongshotDeep with " <$> hashers)
+    (genTestProp testLongshot "deep" "Deep longshot with " <$> hashers)
   ]

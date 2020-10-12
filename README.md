@@ -12,7 +12,7 @@ __Search for preimage__ from a given hash value using _Brute-force_ method based
 
 * Support various __search lengths__, __character sets__ and __hashers__.
 * Strict mode: searches only for a given _exact length_
-* Deep mode: searches _everything less than or equal_ to a given length.
+* Deep mode: Incrementally searches when you do not know the exact length of search
 * Use `CPUs` as _much_ as possible. __Get the most out of them!__
 * Use, however, `memory` as _little_ as possible.
   
@@ -22,10 +22,10 @@ Enjoy `longshot`. Good luck!
 
 
 ```plain
-longshot - Fast and concise Brute-force search
+longshot - Fast Brute-force search using parallelism
 
 Usage:
-  longshot run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
+  longshot run        [--deep | -n SIZE] [-c CHARS] [-a HASHER] HEX
   longshot image      [-a HASHER] KEY
 
 Commands:
@@ -38,6 +38,8 @@ Arguments:
 
 Options:
   -h --help           Show this
+  --deep              Deep search by increasing length of search
+                      Use when you do not know the exact length of preimage
   -n SIZE             Specify search length  [default: 8]   
   -c CHARS            Specify characters available in preimage  [default: 0123456789]
   -a HASHER           Specify hash algorithm  [default: sha256]
@@ -48,7 +50,6 @@ Options:
                       blake3_256    blake3_384    blake3_512
                       keccak_256    keccak_384    keccak_512
                       skein_256     skein_384     skein_512
-  --deep              Search deeply including less than a given search length
 ```
 
 ## How to build
@@ -90,8 +91,9 @@ Found  12345678
 $ ./longshot run 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
 Not found
 
-## If you don't know the key length, use deep search. (--deep)
-## It will try to search with less than or equal to the given length.
+## If you don't know the exact key length, use deep search. (--deep)
+## In most cases, it is difficult to know the length of the preimage.
+## It will try to search by increasing length of search
 $ ./longshot run --deep 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
 Found  12345
 ```
@@ -106,7 +108,7 @@ $ ./longshot image -a blake2b sofia
 bb40f637bb211532318965627f15bb165f701230fd83e0adf8cd673a6ee02830
 
 ## Need different character set. Don't forget --deep
-$ ./longshot run -c 'abcdefghijklmnopqrstuvwxyz' -a blake2b --deep bb40f6..e02830
+$ ./longshot run --deep -c 'abcdefghijklmnopqrstuvwxyz' -a blake2b bb40f6..e02830
 Found  sofia
 
 ## You should consider the following if there might be more characters in preimage.

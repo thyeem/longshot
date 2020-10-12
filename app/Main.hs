@@ -11,10 +11,10 @@ import           Crypto.Longshot.Hasher         ( getHasher )
 
 patterns :: Docopt
 patterns = [docopt|
-longshot - Fast and concise Brute-force search
+longshot - Fast Brute-force search using parallelism
 
 Usage:
-  longshot run        [-n SIZE] [-c CHARS] [-a HASHER] [--deep] HEX
+  longshot run        [--deep | -n SIZE] [-c CHARS] [-a HASHER] HEX
   longshot image      [-a HASHER] KEY
 
 Commands:
@@ -27,6 +27,8 @@ Arguments:
 
 Options:
   -h --help           Show this
+  --deep              Deep search by increasing length of search
+                      Use when you do not know the exact length of preimage
   -n SIZE             Specify search length  [default: 8]   
   -c CHARS            Specify characters in preimage  [default: 0123456789]
   -a HASHER           Specify hash algorithm  [default: sha256]
@@ -37,7 +39,6 @@ Options:
                       blake3_256    blake3_384    blake3_512
                       keccak_256    keccak_384    keccak_512
                       skein_256     skein_384     skein_512
-  --deep              Search deeply including less than a given search length
 |]
 
 -- | Defines args-ops frequently used
@@ -66,8 +67,8 @@ run args = do
   size   <- (read <$> (args <->|! shortOption 'n')) :: IO Int
   hasher <- getHasher <$> (args <->|! shortOption 'a')
   let solver | args >< longOption "deep" = bruteforceDeep
-             | otherwise                 = bruteforce
-  let found = solver size chars hex hasher
+             | otherwise                 = bruteforce size
+  let found = solver chars hex hasher
   case found of
     Just key -> putStrLn $ "Found  " <> key
     _        -> putStrLn "Not found"
