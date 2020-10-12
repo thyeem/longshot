@@ -12,7 +12,7 @@ __Search for preimage__ from a given hash value using _Brute-force_ method based
 
 * Support various __search lengths__, __character sets__ and __hashers__.
 * Strict mode: searches only for a given _exact length_
-* Deep mode: Incrementally searches when you do not know the exact length of search
+* Deep mode: **Incrementally searches** when you *do not know the exact length of search*
 * Use `CPUs` as _much_ as possible. __Get the most out of them!__
 * Use, however, `memory` as _little_ as possible.
   
@@ -113,15 +113,16 @@ Found  sofia
 
 ## You should consider the following if there might be more characters in preimage.
 ## More characters, much longer time to find!
-$ ./longshot run -c 'abcdefghijklmnopqrstuvwxyz0123456789' -a blake2b --deep bb40f6..e02830
+$ ./longshot run --deep -c 'abcdefghijklmnopqrstuvwxyz0123456789' -a blake2b bb40f6..e02830
 
 ## Roughly, time spending is proportional to (Number of char available) ^ (char length).
 ## Exponent 'char length' is surely more dominant! Use long-long password as always!
 
-## longshot is very efficient and get the most of CPU's power in parallel.
-## But this kind of work would be very painful time even for longshot.
-$ ./longshot run -n 12 -c 'abcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+[]{}\|' \
-                 -a blake2b --deep bb40f6..e02830 +RTS -s
+## Longshot is very efficient and get the most of CPU's power in parallel.
+## But this kind of work would need a lot of time even for longshot 
+## due to exponentially increased search space.
+$ ./longshot run -deep -c 'abcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+[]{}\|' \
+                 -a blake2b bb40f6..e02830 +RTS -s
 
 ## '+RTS -s' the end of line is optional, and that is for a summary of CPU time and memory.
 ```

@@ -56,7 +56,7 @@ $( funcGenerator )
 --   runPar | A partially applied function for parallel execution
 -- ------------------------------------------------------------------------------
 -- prefixes | All possible combinations of given prefix characters.
---          | The search space is equally partioned based on these prefixes.
+--          | The search space is equally partitioned based on these prefixes.
 --          | length of prefixes == number of sparks
 -- ------------------------------------------------------------------------------
 -- @
@@ -93,7 +93,7 @@ bruteforceDeep chars hex hasher = foldl' (<|>) empty found
 
 -- | Parallel map using deepseq, par and pseq
 --
--- Type of any argument in this map should be instance of 'NFData'.
+-- Type of any argument in this map should be an instance of 'NFData'.
 --
 (<%>) :: (NFData a, NFData b) => (a -> b) -> [a] -> [b]
 f <%> []       = []
