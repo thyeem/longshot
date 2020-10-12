@@ -81,7 +81,7 @@ bruteforcePar numBind
   | numBind `elem` [0 .. maxNumBind] = $( funcList ) !! numBind
   | otherwise = errorWithoutStackTrace "Not available search length"
 
--- | Deep Brute-force search including less than a given search size
+-- | Incrementally searches without knowing the exact length of search
 --
 -- See the 'bruteforce' function for the arguments used
 --
