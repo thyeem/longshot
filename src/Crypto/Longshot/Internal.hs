@@ -42,23 +42,23 @@ $( funcGenerator )
 -- | Brute-force search only for a given exact length
 --
 -- @
--- ------------------------------------------------------------------------------
---     size | Preimage length to search
--- ------------------------------------------------------------------------------
---    chars | Given character set like "0123456789"
--- ------------------------------------------------------------------------------
---      hex | Given hex-string like "17da1ae431f965d839ec8eb93087fb2b"
--- ------------------------------------------------------------------------------
---   hasher | Hash functions in 'Hasher' module. Get it using 'getHasher'
--- ------------------------------------------------------------------------------
---  numBind | Number of bound variables defined by search length and prefix size
--- ------------------------------------------------------------------------------
---   runPar | A partially applied function for parallel execution
--- ------------------------------------------------------------------------------
--- prefixes | All possible combinations of given prefix characters.
---          | The search space is equally partitioned based on these prefixes.
---          | length of prefixes == number of sparks
--- ------------------------------------------------------------------------------
+-- +----------+----------------------------------------------------------------------+
+-- |     size | Preimage length to search                                            |
+-- +----------+----------------------------------------------------------------------+
+-- |    chars | Given character set like "0123456789"                                |
+-- +----------+----------------------------------------------------------------------+
+-- |      hex | Given hex-string like "17da1ae431f965d839ec8eb93087fb2b"             |
+-- +----------+----------------------------------------------------------------------+
+-- |   hasher | Hash functions in 'Hasher' module. Get it using 'getHasher'          |
+-- +----------+----------------------------------------------------------------------+
+-- |  numBind | Number of bound variables defined by search length and prefix size   |
+-- +----------+----------------------------------------------------------------------+
+-- |   runPar | A partially applied function for parallel execution                  |
+-- +----------+----------------------------------------------------------------------+
+-- | prefixes | All possible combinations of given prefix characters.                |
+-- |          | The search space is equally partitioned based on these prefixes.     |
+-- |          | length of prefixes == number of sparks                               |
+-- +----------+----------------------------------------------------------------------+
 -- @
 --
 bruteforce :: Int -> String -> String -> Hasher -> Maybe String
