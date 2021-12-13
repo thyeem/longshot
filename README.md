@@ -4,7 +4,7 @@
 
 
 
-[![Build Status](https://travis-ci.com/thyeem/longshot.svg?branch=master)](https://travis-ci.com/thyeem/longshot) [![Hackage](https://img.shields.io/hackage/v/longshot)](https://hackage.haskell.org/package/longshot)
+[![Build Status](https://api.travis-ci.com/thyeem/longshot.svg?branch=master)](https://app.travis-ci.com/thyeem/longshot) [![Hackage](https://img.shields.io/hackage/v/longshot)](https://hackage.haskell.org/package/longshot)
 
 # longshot
 
@@ -15,7 +15,7 @@ __Search for preimage__ from a given hash value using _Brute-force_ method based
 * Deep mode: **Incrementally searches** when you *do not know the exact length of search*
 * Use `CPUs` as _much_ as possible. __Get the most out of them!__
 * Use, however, `memory` as _little_ as possible.
-  
+
 
 Enjoy `longshot`. Good luck!
 
@@ -40,7 +40,7 @@ Options:
   -h --help           Show this
   --deep              Deep search by increasing length of search
                       Use when you do not know the exact length of preimage
-  -n SIZE             Specify search length  [default: 8]   
+  -n SIZE             Specify search length  [default: 8]
   -c CHARS            Specify characters available in preimage  [default: 0123456789]
   -a HASHER           Specify hash algorithm  [default: sha256]
                       HASHER available below:
@@ -59,7 +59,7 @@ $ brew install stack
 
 $ git clone https://github.com/thyeem/longshot.git
 
-$ make build 
+$ make build
 
 ## Optional: test if installed properly using quickcheck
 $ make test
@@ -97,7 +97,7 @@ Not found
 $ ./longshot run --deep 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
 Found  12345
 ```
-These are all about how to use `longshot`.  
+These are all about how to use `longshot`.
 See below for more interesting detailed examples.
 
 ## More examples
@@ -119,7 +119,7 @@ $ ./longshot run --deep -c 'abcdefghijklmnopqrstuvwxyz0123456789' -a blake2b bb4
 ## Exponent 'char length' is surely more dominant! Use long-long password as always!
 
 ## Longshot is very efficient and get the most of CPU's power in parallel.
-## But this kind of work would need a lot of time even for longshot 
+## But this kind of work would need a lot of time even for longshot
 ## due to exponentially increased search space.
 $ ./longshot run -deep -c 'abcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+[]{}\|' \
                  -a blake2b bb40f6..e02830 +RTS -s
