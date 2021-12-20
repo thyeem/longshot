@@ -1,4 +1,4 @@
-<p align="center"> <img src="longshot.png" height="200"/> </p>
+<p align="center"> <img src="https://raw.githubusercontent.com/thyeem/longshot/master/longshot.png" height="200"/> </p>
 
 > Is it really a __long shot__ to hope that the COVID-19 pandemic will end?
 
