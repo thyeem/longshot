@@ -15,7 +15,6 @@
 -- The values below are defined by default.
 --
 -- When not provided as options in CUI, the following values are used.
---
 module Crypto.Longshot.Const where
 
 -- | Default characters available in a preimage

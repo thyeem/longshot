@@ -1,11 +1,11 @@
-import           Test.Tasty
-import           Test.Tasty.QuickCheck
-import           Test.Tasty.HUnit
 import           Control.Monad
-import qualified Data.ByteString.Char8         as C
-import qualified Data.ByteString.Base16        as H
-import           Crypto.Longshot.Internal
 import           Crypto.Longshot.Hasher
+import           Crypto.Longshot.Internal
+import qualified Data.ByteString.Base16        as H
+import qualified Data.ByteString.Char8         as C
+import           Test.Tasty
+import           Test.Tasty.HUnit
+import           Test.Tasty.QuickCheck
 
 main :: IO ()
 main = defaultMain tests

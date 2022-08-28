@@ -1,26 +1,37 @@
-*.hi
-*.o
-*.sw?
-*.tag
-*~
-.stack-work/
-*.ipynb_checkpoints
+# mac
 .DS_Store
-*.cabal
+
+# emacs
+[#]*[#]
+
+# vim
+*.sw?
+*~
+
+# c/c++ object file
 *.o
-*.hi
-stack*.yaml.lock
-.cabal-sandbox/
-cabal-dev/
+
+# Makefile
+*.d
+
+# windows
+Thumbs.db
+
+# haskell
+.stack-work/
 dist-newstyle/
-cabal.sandbox.config
-TAGS
-Setup
 dist/
-tags
-*.imports
-.dir-locals.el
-.git/
+newdist/
+*.hi
+*.o
+cabal.project.local
+stack.yaml
+stack.yaml.lock
 .hspec-failures
-*.eventlog
+
+# python
+*.ipynb_checkpoints
+__pycache__
+
+# bin
 app/longshot

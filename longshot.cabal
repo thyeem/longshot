@@ -1,0 +1,96 @@
+cabal-version:      1.18
+name:               longshot
+version:            0.1.1
+synopsis:           Fast Brute-force search using parallelism
+license:            MIT
+license-file:       LICENSE
+author:             Francis Lim, Jongwhan Lee
+copyright:          Francis Lim 2020-2023
+maintainer:         Francis Lim <thyeem@gmail.com>
+category:           Cryptography, Search, Algorithm, Parallelism
+description:
+    Longshot enables to search for preimages from a given hash value
+    using a brute-force method based on parallelism.
+    .
+    * Support various search lengths, character sets and hashers
+    * Strict mode: searches only for a given exact length
+    * Deep mode: Incrementally searches when you do not know the exact length of search
+    * Use @CPUs@ as much as possible. Get the most out of them!
+    * Use, however, @memory@ as little as possible.
+    .
+    Please see the documentation at https://github.com/thyeem/longshot
+    for usage example.
+bug-reports:        https://github.com/thyeem/longshot/issues
+homepage:           https://github.com/thyeem/longshot#readme
+build-type:         Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+source-repository head
+  type: git
+  location: https://github.com/thyeem/longshot.git
+
+library
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.12.0 && <5
+    , base16-bytestring
+    , blake2
+    , blake3
+    , bytestring
+    , containers
+    , cryptohash-sha256
+    , cryptonite
+    , deepseq
+    , memory
+    , parallel
+    , template-haskell
+  exposed-modules:
+      Crypto.Longshot
+      Crypto.Longshot.Const
+      Crypto.Longshot.Hasher
+      Crypto.Longshot.Internal
+      Crypto.Longshot.TH
+  default-language: Haskell2010
+
+executable longshot
+  hs-source-dirs:
+      app
+  main-is:
+      Main.hs
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -dynamic -feager-blackholing -eventlog
+  build-depends:
+      base >=4.12.0 && <5
+    , base16-bytestring
+    , blake2
+    , blake3
+    , bytestring
+    , cmdargs
+    , containers
+    , cryptohash-sha256
+    , cryptonite
+    , deepseq
+    , docopt
+    , extra
+    , memory
+    , parallel
+    , template-haskell
+    , longshot
+  default-language: Haskell2010
+
+test-suite longshot-test
+  hs-source-dirs:
+      test
+  type:
+      exitcode-stdio-1.0
+  main-is:
+      Spec.hs
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.12.0 && <5
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , longshot
+  default-language: Haskell2010
